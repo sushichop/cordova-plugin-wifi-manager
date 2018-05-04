@@ -1,0 +1,25 @@
+{
+  "name": "cordova-plugin-wifi-manager",
+  "version": "0.1.0",
+  "description": "Wi-Fi Manager Plugin for Apache Cordova",
+  "cordova": {
+    "id": "cordova-plugin-wifi-manager",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sushichop/cordova-plugin-wifi-manager"
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "wifi"
+  ],
+  "author": "sushichop.net",
+  "license": "MIT"
+}

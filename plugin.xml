@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-wifi-manager" version="0.1.0">
+    <name>WiFiManager</name>
+    <description>Wi-Fi Manager Plugin for Apache Cordova</description>
+    <license>MIT</license>
+    <keywords>cordova,wifi</keywords>
+    <repo>https://github.com/sushichop/cordova-plugin-wifi-manager.git</repo>
+
+    <js-module src="www/wifiManager.js" name="wifiManager">
+        <clobbers target="wifiManager" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="config.xml" parent="/*">
+            <feature name="WiFiManager">
+                <param name="android-package" value="net.sushichop.cordova.wifimanager.WiFiManagerPlugin" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+        </config-file>
+
+        <source-file src="src/android/WiFiManagerPlugin.java" target-dir="src/net/sushichop/cordova/wifimanager/" />
+
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="WiFiManager">
+                <param name="ios-package" value="SCPWiFiManagerPlugin" />
+            </feature>
+        </config-file>
+
+        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Debug.plist">
+            <true />
+        </config-file>
+        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Release.plist">
+            <true />
+        </config-file>
+
+        <header-file src="src/ios/SCPWiFiManagerPlugin.h" />
+        <source-file src="src/ios/SCPWiFiManagerPlugin.m" />
+
+        <framework src="NetworkExtension.framework" />
+
+    </platform>
+
+</plugin>
