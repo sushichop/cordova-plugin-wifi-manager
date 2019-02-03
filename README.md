@@ -1,5 +1,9 @@
 # cordova-plugin-wifi-manager
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sushichop/cordova-plugin-wifi-manager/blob/master/LICENSE)
+[![npm version](https://img.shields.io/npm/v/cordova-plugin-wifi-manager.svg?colorB=blue)](https://www.npmjs.com/package/cordova-plugin-wifi-manager)
+[![Build Status](https://img.shields.io/travis/sushichop/cordova-plugin-wifi-manager/master.svg)](https://travis-ci.org/sushichop/cordova-plugin-wifi-manager)
+
 Wi-Fi Manager Plugin for Apache Cordova
 
 ## Supported Platforms

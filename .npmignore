@@ -1,5 +1,5 @@
 .npmignore
 .gitignore
-.DS_Store
-.idea/
 node_modules/
+.idea/
+.DS_Store
