@@ -85,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (CDVPluginResult *)p_createPluginErrorResultWithCode:(NSInteger)code message:(NSString *)message {
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSString *, NSObject *> *dict = [NSMutableDictionary dictionary];
     dict[@"code"] = @(code);
     dict[@"message"] = message;
     return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dict];
