@@ -69,8 +69,6 @@ static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iO
 #endif
 }
 
-NS_ASSUME_NONNULL_BEGIN
-
 - (CDVPluginResult *)p_createPluginOKResultWithSSID:(NSString *)SSID passphrase:(nullable NSString *)passphrase {
     NSMutableDictionary<NSString *, NSString *> *dict = [NSMutableDictionary dictionary];
     dict[@"ssid"] = SSID;
@@ -90,7 +88,5 @@ NS_ASSUME_NONNULL_BEGIN
     dict[@"message"] = message;
     return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dict];
 }
-
-NS_ASSUME_NONNULL_END
 
 @end
