@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 var PLUGIN_NAME = 'WiFiManager';
 var argscheck = require('cordova/argscheck');
-var exec = cordova.require('cordova/exec');
+var exec = require('cordova/exec');
 
 /**
  * Connects to Wi-Fi access point.
@@ -12,7 +12,7 @@ var exec = cordova.require('cordova/exec');
  * @param successCb {Function} success callback
  * @param failureCb {Function} failure callback
  */
-function connect(ssid, passphrase, successCb, failureCb) {
+function connect (ssid, passphrase, successCb, failureCb) {
   argscheck.checkArgs('ssFF', PLUGIN_NAME + '.connect', arguments);
   exec(successCb, failureCb, PLUGIN_NAME, 'connect', [ssid, passphrase]);
 }
@@ -24,7 +24,7 @@ function connect(ssid, passphrase, successCb, failureCb) {
  * @param successCb {Function} success callback
  * @param failureCb {Function} failure callback
  */
-function disconnect(ssid, successCb, failureCb) {
+function disconnect (ssid, successCb, failureCb) {
   argscheck.checkArgs('sFF', PLUGIN_NAME + '.disconnect', arguments);
   exec(successCb, failureCb, PLUGIN_NAME, 'disconnect', [ssid]);
 }
