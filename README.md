@@ -22,14 +22,18 @@ cordova plugin add cordova-plugin-wifi-manager
 #### Connect to Wi-Fi access point
 
 ```javascript
-window.document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {
-  window.wifiManager.connect(
+  wifimanager.connect(
     'TARGET_SSID',
     'TARGET_PASSPHRASE',
-    function (success) { console.log(success); },
-    function (failure) { console.log(failure); }
+    function (ssid, passphrase) {
+      console.log('Successful. ssid: ' + ssid + ', passphrase: ' + passphrase);
+    },
+    function (code, message) {
+      console.log('Failed. code: ' + code + ', message: ' + message);
+    }
   );
 }
 ```
@@ -37,13 +41,17 @@ function onDeviceReady () {
 #### Disconnect from Wi-Fi access point
 
 ```javascript
-window.document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('deviceready', onDeviceReady, false);
 
-function onDeviceReady () {
-  window.wifiManager.disconnect(
+function onDeviceReady () {  
+  wifimanager.disconnect(
     'TARGET_SSID',
-    function (success) { console.log(success); },
-    function (failure) { console.log(failure); }
+    function (ssid) {
+      console.log('Successful. ssid: ' + ssid);
+    },
+    function (code, message) {
+      console.log('Failed. code: ' + code + ', message: ' + message);
+    }
   );
 }
 ```
