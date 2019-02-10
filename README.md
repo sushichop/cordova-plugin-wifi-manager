@@ -9,7 +9,7 @@ Wi-Fi Manager Plugin for Apache Cordova
 
 ## Supported Platforms
 
-- Android: 4.4 or later
+- Android: 5.0 or later
 - iOS: 10.0 or later
 
 ## Installation
