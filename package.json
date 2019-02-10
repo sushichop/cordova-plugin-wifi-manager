@@ -5,6 +5,7 @@
   "engines": {
     "node": ">= 8"
   },
+  "types": "./types/index.d.ts",
   "cordova": {
     "id": "cordova-plugin-wifi-manager",
     "platforms": [
