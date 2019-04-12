@@ -1,0 +1,55 @@
+version: 2.1
+
+executors:
+  node:
+    parameters:
+      tag:
+        type: string
+    docker:
+      - image: circleci/node:<< parameters.tag >>
+
+commands:
+  restore_npm:
+    steps:
+      - restore_cache:
+          name: Restore npm dependencies
+          key: npm-{{ checksum "package-lock.json" }}
+
+  save_npm:
+    steps:
+      - save_cache:
+          name: Cache npm dependencies
+          key: npm-{{ checksum "package-lock.json" }}
+          paths: node_modules
+
+jobs:
+  test:
+    parameters:
+      node_version:
+        type: string
+    executor:
+      name: node
+      tag: << parameters.node_version >>
+    steps:
+      - checkout
+      - run:
+          name: Show node version
+          command: node --version
+      - restore_npm
+      - run:
+          name: Install npm dependencies
+          command: npm install
+      - save_npm
+      - run:
+          name: Run npm test
+          command: npm test
+
+workflows:
+  build:
+    jobs:
+      - test:
+          name: node_8
+          node_version: "8"
+      - test:
+          name: node_10
+          node_version: "10"
