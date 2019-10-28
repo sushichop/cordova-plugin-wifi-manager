@@ -23,6 +23,7 @@
             <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <uses-permission android:name="android.permission.OVERRIDE_CONFIG_WIFI" />
         </config-file>
 
         <source-file src="src/android/WiFiManagerPlugin.java" target-dir="src/net/sushichop/cordova/wifimanager/" />
