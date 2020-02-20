@@ -27,7 +27,7 @@ cordova plugin add cordova-plugin-wifi-manager
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {
-  wifimanager.connect(
+  window.wifiManager.connect(
     'TARGET_SSID',
     'TARGET_PASSPHRASE',
     function (ssid, passphrase) {
@@ -46,7 +46,7 @@ function onDeviceReady () {
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {  
-  wifimanager.disconnect(
+  window.wifiManager.disconnect(
     'TARGET_SSID',
     function (ssid) {
       console.log('Successful. ssid: ' + ssid);
