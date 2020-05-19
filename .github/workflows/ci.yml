@@ -15,4 +15,4 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: |
         npm ci
-        npm run
+        npm test
