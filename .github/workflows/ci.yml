@@ -1,0 +1,17 @@
+name: ci
+on: push
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        node: [10, 12]
+    runs-on: ubuntu-latest
+    name: Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci
+      - run: npm test
