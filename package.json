@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "Wi-Fi Manager Plugin for Apache Cordova",
   "engines": {
-    "node": ">= 8"
+    "node": ">= 10"
   },
   "types": "./types/index.d.ts",
   "cordova": {

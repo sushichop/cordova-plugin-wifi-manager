@@ -48,8 +48,8 @@ workflows:
   build:
     jobs:
       - test:
-          name: node_8
-          node_version: "8"
-      - test:
           name: node_10
           node_version: "10"
+      - test:
+          name: node_12
+          node_version: "12"
