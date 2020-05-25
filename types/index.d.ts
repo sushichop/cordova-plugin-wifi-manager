@@ -1,4 +1,4 @@
-// Type definitions for cordova-plugin-wifi-manager 0.2.0
+// Type definitions for cordova-plugin-wifi-manager 0.2.1
 // Project: https://github.com/sushichop/cordova-plugin-wifi-manager
 // Definitions by: Koichi Yokota <https://github.com/sushichop>
 
