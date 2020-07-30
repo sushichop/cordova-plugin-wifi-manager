@@ -1,22 +1,27 @@
-name: ci
+name: CI
+
 on:
   push:
-    branches: [master]
+    branches:
+    - master
+    tags:
+    - '**'
   pull_request:
+    branches:
+    - '**'
 
 jobs:
   unit-test:
+    name: Unit Test - node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [10, 12]
-    name: Node.js ${{ matrix.node }}
+        node: [12.x, 14.x]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
-    - name: test
-      run: |
+    - run: |
         npm ci
-        npm test
+        npm run lint

@@ -25,12 +25,14 @@
     "wifi"
   ],
   "scripts": {
-    "lint": "eslint 'www/**/*.js'",
+    "lint": "eslint --ext js ./",
+    "lint:fix": "eslint --ext js ./ --quiet --fix",
     "test": "npm run lint"
   },
   "author": "Koichi Yokota",
   "license": "MIT",
   "devDependencies": {
+    "danger": "^10.3.0",
     "eslint": "^7.5.0",
     "eslint-cli": "^1.1.1",
     "eslint-config-semistandard": "^15.0.1",
