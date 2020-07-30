@@ -2,6 +2,7 @@
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sushichop/cordova-plugin-wifi-manager/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/cordova-plugin-wifi-manager.svg?colorB=blue)](https://www.npmjs.com/package/cordova-plugin-wifi-manager)
+![GitHub Actions](https://github.com/sushichop/cordova-plugin-wifi-manager/workflows/ci/badge.svg)
 [![CircleCI](https://img.shields.io/circleci/project/github/sushichop/cordova-plugin-wifi-manager/master.svg?label=circleci)](https://circleci.com/gh/sushichop/cordova-plugin-wifi-manager)
 [![Travis](https://img.shields.io/travis/sushichop/cordova-plugin-wifi-manager/master.svg?label=travis)](https://travis-ci.org/sushichop/cordova-plugin-wifi-manager)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)](https://github.com/Flet/semistandard)
@@ -27,7 +28,7 @@ cordova plugin add cordova-plugin-wifi-manager
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {
-  wifimanager.connect(
+  window.wifiManager.connect(
     'TARGET_SSID',
     'TARGET_PASSPHRASE',
     function (ssid, passphrase) {
@@ -46,7 +47,7 @@ function onDeviceReady () {
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {  
-  wifimanager.disconnect(
+  window.wifiManager.disconnect(
     'TARGET_SSID',
     function (ssid) {
       console.log('Successful. ssid: ' + ssid);
