@@ -1,8 +1,15 @@
 package net.sushichop.cordova.wifimanager;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkRequest;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import android.net.wifi.WifiNetworkSpecifier;
+import android.os.Build;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -32,6 +39,7 @@ public class WiFiManagerPlugin extends CordovaPlugin {
     private static final String UNKNOWN_ACTION_ERROR_MESSAGE    = "unknownAction occurred.";
 
     private WifiManager manager;
+    private ConnectivityManager.NetworkCallback networkCallback;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
@@ -59,12 +67,25 @@ public class WiFiManagerPlugin extends CordovaPlugin {
 
     private void connect(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
+        String ssid = args.optString(0);
+        String passphrase = args.optString(1);
+        JSONObject json = new JSONObject();
+
+        if (isAndroidQOrLater()) {
+            Context context = cordova.getActivity().getApplicationContext();
+            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            connectAndroidQ(connectivityManager, ssid, passphrase, callbackContext);
+        } else {
+            connectAndroid(ssid, passphrase, callbackContext);
+        }
+    }
+
+    private void connectAndroid(final String ssid, final String passphrase, CallbackContext callbackContext) throws JSONException {
+
         if (!manager.isWifiEnabled()) {
             manager.setWifiEnabled(true);
         }
 
-        String ssid = args.optString(0);
-        String passphrase = args.optString(1);
         JSONObject json = new JSONObject();
 
         WifiConfiguration config = setWPAConfiguration(ssid, passphrase);
@@ -98,10 +119,100 @@ public class WiFiManagerPlugin extends CordovaPlugin {
         callbackContext.success(json);
     }
 
+    @TargetApi(Build.VERSION_CODES.Q)
+    private boolean connectAndroidQ( ConnectivityManager connectivityManager, final String ssid, final String passphrase, CallbackContext callbackContext) {
+        if (connectivityManager == null) {
+            return false;
+        }
+
+        WifiNetworkSpecifier.Builder wifiNetworkSpecifierBuilder = new WifiNetworkSpecifier.Builder()
+                .setSsid(ssid)
+                .setWpa2Passphrase(passphrase);
+
+        NetworkRequest networkRequest = new NetworkRequest.Builder()
+                .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
+                .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+                .setNetworkSpecifier(wifiNetworkSpecifierBuilder.build())
+                .build();
+
+        networkCallback = new ConnectivityManager.NetworkCallback() {
+            @Override
+            public void onAvailable(Network network) {
+                JSONObject json = new JSONObject();
+                super.onAvailable(network);
+                if (connectivityManager.bindProcessToNetwork(network)) {
+                    try {
+                        json.put("ssid", ssid);
+                        json.put("passphrase", passphrase);
+                    } catch(JSONException exception) {
+                    } finally {
+                        callbackContext.success(json);
+                    }
+                } else {
+                    try {
+                        json.put("code", ENABLE_NETWORK_ERROR);
+                        json.put("message", ENABLE_NETWORK_ERROR_MESSAGE);
+                    } catch(JSONException exception) {
+                    } finally {
+                        callbackContext.error(json);
+                    }
+                }
+            }
+
+            @Override
+            public void onUnavailable() {
+                JSONObject json = new JSONObject();
+                super.onUnavailable();
+                try {
+                    json.put("code", ENABLE_NETWORK_ERROR);
+                    json.put("message", ENABLE_NETWORK_ERROR_MESSAGE);
+                } catch(JSONException exception) {
+                } finally {
+                    callbackContext.success(json);
+                }
+            }
+        };
+
+        connectivityManager.requestNetwork(networkRequest, networkCallback);
+
+        return true;
+    }
+
+    private static boolean isAndroidQOrLater() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+    }
 
     private void disconnect(JSONArray args, CallbackContext callbackContext) throws JSONException {
 
         String ssid = args.optString(0);
+
+        if (isAndroidQOrLater()) {
+            Context context = cordova.getActivity().getApplicationContext();
+            final ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            disconnectAndroidQ(connectivityManager, ssid, callbackContext);
+        } else {
+            disconnectAndroid(ssid, callbackContext);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.Q)
+    private void disconnectAndroidQ(ConnectivityManager connectivityManager, final String ssid, CallbackContext callbackContext) {
+        JSONObject json = new JSONObject();
+
+        if (networkCallback != null) {
+            connectivityManager.unregisterNetworkCallback(networkCallback);
+            networkCallback = null;
+        }
+
+        try {
+            json.put("ssid", ssid);
+        } catch(JSONException exception){
+        } finally {
+            callbackContext.success(json);
+        }
+    }
+
+    private void disconnectAndroid(final String ssid, CallbackContext callbackContext) throws JSONException {
 
         JSONObject json = new JSONObject();
 
