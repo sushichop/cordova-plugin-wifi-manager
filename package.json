@@ -27,7 +27,8 @@
   "scripts": {
     "lint": "eslint --ext js ./",
     "lint:fix": "eslint --ext js ./ --quiet --fix",
-    "test": "npm run lint"
+    "test:android": "cordova-paramedic --cleanUpAfterRun --verbose --platform android --plugin .",
+    "test:ios": "cordova-paramedic --cleanUpAfterRun --verbose --platform ios --plugin ."
   },
   "author": "Koichi Yokota",
   "license": "MIT",
