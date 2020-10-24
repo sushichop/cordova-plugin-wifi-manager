@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-wifi-manager-tests" version="0.3.0">
+    <name>WiFiManager Tests</name>
+    <description>Wi-Fi Manager Plugin Tests</description>
+    <license>MIT</license>
+
+    <js-module src="tests.js" name="tests">
+    </js-module>
+
+    <platform name="android">
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+            <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+        </config-file>
+    </platform>
+
+    <platform name="ios">
+        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Debug.plist">
+            <true />
+        </config-file>
+        <config-file parent="com.apple.developer.networking.HotspotConfiguration" target="*/Entitlements-Release.plist">
+            <true />
+        </config-file>
+    </platform>
+
+</plugin>
