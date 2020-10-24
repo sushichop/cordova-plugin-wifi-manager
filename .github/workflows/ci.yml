@@ -11,12 +11,12 @@ on:
     - '**'
 
 jobs:
-  unit-test:
-    name: Unit Test - node.js ${{ matrix.node }}
+  lint:
+    name: Lint - node.js ${{ matrix.node }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [12.x, 14.x]
+        node: [12.x]
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
@@ -25,3 +25,19 @@ jobs:
     - run: |
         npm ci
         npm run lint
+
+  ios-test:
+    name: Cordova Paramedic Test - ${{ matrix.os }}, node.js ${{ matrix.node }}
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        node: [12.x]
+        os: [ios]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+    - run: |
+        ./scripts/setup-${{ matrix.os }}.sh
+        ./scripts/paramedic-${{ matrix.os }}.sh
