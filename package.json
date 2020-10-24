@@ -32,14 +32,14 @@
   "author": "Koichi Yokota",
   "license": "MIT",
   "devDependencies": {
-    "danger": "^10.3.0",
-    "eslint": "^7.5.0",
+    "danger": "^10.5.0",
+    "eslint": "^7.12.0",
     "eslint-cli": "^1.1.1",
     "eslint-config-semistandard": "^15.0.1",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.22.0",
+    "eslint-config-standard": "^15.0.0",
+    "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.2"
   }
 }
