@@ -1,9 +1,9 @@
 # Change Log
 
-## [0.x.y](https://github.com/sushichop/cordova-plugin-wifi-manager/tree/0.x.y) (yyy-mm-dd)
+## [0.3.0](https://github.com/sushichop/cordova-plugin-wifi-manager/tree/0.3.0) (2020-10-25)
 
 - Add AndroidQ compatibility [#14](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/14)
-- Add Cordova Paramedic Tests [#15](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/15)
+- Add Cordova Paramedic Tests [#15](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/15) [#16](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/16)
 
 ## [0.2.1](https://github.com/sushichop/cordova-plugin-wifi-manager/tree/0.2.1) (2020-05-25)
 
