@@ -20,6 +20,14 @@ Wi-Fi Manager Plugin for Apache Cordova
 cordova plugin add cordova-plugin-wifi-manager
 ```
 
+__Notice__ If you use this plugin for Android 10 or later devices, follow the workaround as below for now.
+
+```
+cordova plugin add cordova-plugin-wifi-manager@0.2.1
+cordova prepare
+cordova run android --device -- --gradleArg=-PcdvTargetSdkVersion=28 
+```
+
 ## Usage
 
 #### Connect to Wi-Fi access point
