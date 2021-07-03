@@ -74,8 +74,10 @@ public class WiFiManagerPlugin extends CordovaPlugin {
         return true;
     }
 
-    private static boolean isAndroidQOrLater() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
+    private boolean isAndroidQOrLater() {
+        Context context = cordova.getActivity().getApplicationContext();
+        int targetSdkVersion = context.getApplicationInfo().targetSdkVersion;
+        return (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) && (targetSdkVersion >= Build.VERSION_CODES.Q);
     }
 
     private void connect(JSONArray args, CallbackContext callbackContext) throws JSONException {
