@@ -1,11 +1,11 @@
 #import "SCPWiFiManagerPlugin.h"
 #import <NetworkExtension/NetworkExtension.h>
 
-static const NSInteger kErrorCodeOffset             = 2000;
+static const NSInteger kErrorCodeOffset                 = 2000;
 
-typedef NS_ENUM(NSInteger, SCPWiFiManagerPluginError) {
-    SCPWiFiManagerPluginErrorNotIOSDevice           = 100,
-    SCPWiFiManagerPluginErrorNotSupportedIOSVersion = 101
+typedef NS_ENUM(NSInteger, SCPWiFiManagerPluginErrorCode) {
+    SCPWiFiManagerPluginErrorCodeNotIOSDevice           = 100 + kErrorCodeOffset,
+    SCPWiFiManagerPluginErrorCodeNotSupportedIOSVersion = 101 + kErrorCodeOffset
 };
 
 static NSString *const kErrorMessageNotIOSDevice            = @"not iOS device.";
@@ -18,11 +18,9 @@ static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iO
 @implementation SCPWiFiManagerPlugin
 
 - (void)connect:(CDVInvokedUrlCommand *)command {
-    
 #if TARGET_OS_SIMULATOR
-    CDVPluginResult *result = [self p_createPluginErrorResultWithCode:(SCPWiFiManagerPluginErrorNotIOSDevice + kErrorCodeOffset) message:kErrorMessageNotIOSDevice];
+    CDVPluginResult *result = [self p_createPluginErrorResultWithCode:SCPWiFiManagerPluginErrorCodeNotIOSDevice message:kErrorMessageNotIOSDevice];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-    
 #else
     if (@available(iOS 11.0, *)) {
         NSString *ssid = [command argumentAtIndex:0 withDefault:@""];
@@ -31,55 +29,38 @@ static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iO
         
         [[NEHotspotConfigurationManager sharedManager] applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
             if (error) {
-                CDVPluginResult *result = [self p_createPluginErrorResultWithCode:(error.code + kErrorCodeOffset) message:error.localizedDescription];
+                CDVPluginResult *result = [self p_createPluginErrorResultWithCode:error.code message:error.localizedDescription];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             } else {
-                CDVPluginResult *result = [self p_createPluginOKResultWithSSID:ssid passphrase:passphrase];
+                CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
             }
         }];
         
     } else {
-        CDVPluginResult *result = [self p_createPluginErrorResultWithCode:(SCPWiFiManagerPluginErrorNotSupportedIOSVersion + kErrorCodeOffset) message:kErrorMessageNotSupportedIOSVersion];
+        CDVPluginResult *result = [self p_createPluginErrorResultWithCode:SCPWiFiManagerPluginErrorCodeNotSupportedIOSVersion message:kErrorMessageNotSupportedIOSVersion];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }
-    
 #endif
 }
 
 - (void)disconnect:(CDVInvokedUrlCommand *)command {
-    
 #if TARGET_OS_SIMULATOR
-    CDVPluginResult *result = [self p_createPluginErrorResultWithCode:(SCPWiFiManagerPluginErrorNotIOSDevice + kErrorCodeOffset) message:kErrorMessageNotIOSDevice];
+    CDVPluginResult *result = [self p_createPluginErrorResultWithCode:SCPWiFiManagerPluginErrorCodeNotIOSDevice message:kErrorMessageNotIOSDevice];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-    
 #else
     if (@available(iOS 11.0, *)) {
         NSString *ssid = [command argumentAtIndex:0 withDefault:@""];
         [[NEHotspotConfigurationManager sharedManager] removeConfigurationForSSID:ssid];
         
-        CDVPluginResult *result = [self p_createPluginOKResultWithSSID:ssid];
+        CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         
     } else {
-        CDVPluginResult *result = [self p_createPluginErrorResultWithCode:(SCPWiFiManagerPluginErrorNotSupportedIOSVersion + kErrorCodeOffset) message:kErrorMessageNotSupportedIOSVersion];
+        CDVPluginResult *result = [self p_createPluginErrorResultWithCode:SCPWiFiManagerPluginErrorCodeNotSupportedIOSVersion message:kErrorMessageNotSupportedIOSVersion];
         [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
     }
-    
 #endif
-}
-
-- (CDVPluginResult *)p_createPluginOKResultWithSSID:(NSString *)SSID passphrase:(nullable NSString *)passphrase {
-    NSMutableDictionary<NSString *, NSString *> *dict = [NSMutableDictionary dictionary];
-    dict[@"ssid"] = SSID;
-    if (passphrase != nil) {
-        dict[@"passphrase"] = passphrase;
-    }
-    return [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:dict];
-}
-
-- (CDVPluginResult *)p_createPluginOKResultWithSSID:(NSString *)SSID {
-    return [self p_createPluginOKResultWithSSID:SSID passphrase:nil];
 }
 
 - (CDVPluginResult *)p_createPluginErrorResultWithCode:(NSInteger)code message:(NSString *)message {
