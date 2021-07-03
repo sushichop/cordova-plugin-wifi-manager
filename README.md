@@ -18,13 +18,17 @@ Wi-Fi Manager Plugin for Apache Cordova
 cordova plugin add cordova-plugin-wifi-manager
 ```
 
-__Notice__ If you use this plugin for Android 10 or later devices, follow the workaround as below for now.
+__Notice__ 
+
+When you use this plugin for Android 10 (API level 29) or later, you can connect to the Internet only through your own 
+(cordova) app. This is due to the specification of new Android API, [WifiNetworkSpecifier](https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier).
+
+If you want to purposely use the deprecated Android API, run the following.
 
 ```
-cordova plugin add cordova-plugin-wifi-manager@0.2.1
-cordova prepare
 cordova run android --device -- --gradleArg=-PcdvTargetSdkVersion=28 
 ```
+
 
 ## Usage
 
