@@ -3,33 +3,60 @@
 // Definitions by: Koichi Yokota <https://github.com/sushichop>
 
 declare namespace WifiManagerPlugin {
-
+  /**
+   * Defines WiFiManager.
+   */
   interface WifiManager {
     /**
      * Connects to Wi-Fi access point.
-     * @param ssid SSID of Wi-Fi access point
-     * @param passphrase passphrase of Wi-Fi access point
-     * @param onSuccess success callback
-     * @param onFailure failure callback
+     * @param ssid SSID of Wi-Fi access point.
+     * @param passphrase Passphrase of Wi-Fi access point.
+     * @param onSuccess Callback invoked when the connect method was successfully called.
+     * @param onFailure Callback invoked when the disconnect method failed to be called.
      */
     connect(
       ssid: string,
       passphrase: string,
-      onSuccess: (ssid: string, passphrase: string) => void,
-      onFailure: (code: number, message: string) => void,
+      onSuccess: SuccessCallback,
+      onFailure: FailureCallback,
     ): void;
 
     /**
      * Disconnects from Wi-Fi access point.
-     * @param ssid SSID of Wi-Fi access point
-     * @param onSuccess success callback
-     * @param onFailure failure callback
+     * @param ssid SSID of Wi-Fi access point.
+     * @param onSuccess Callback invoked when the disconnect method was successfully called.
+     * @param onFailure Callback invoked when the disconnect method failed to be called.
      */
     disconnect(
       ssid: string,
-      onSuccess: (ssid: string) => void,
-      onFailure: (code: number, message: string) => void,
+      onSuccess: SuccessCallback,
+      onFailure: FailureCallback,
     ): void;
+  }
+
+  /**
+   * Callback invoked when the method was successfully called.
+   */
+  type SuccessCallback = () => void;
+
+  /**
+   * Callback invoked when the method failed to be called.
+   */
+  type FailureCallback = (result: Result) => void;
+
+  /**
+   * Defines the result of callback.
+   */
+  interface Result {
+    /**
+     * Result code number.
+     */
+    code: number;
+
+    /**
+     * Result message.
+     */
+    message: string;
   }
 }
 

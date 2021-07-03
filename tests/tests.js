@@ -1,66 +1,70 @@
-exports.defineAutoTests = function () {
-  describe('WiFiManager (window.wifiManager)', function () {
-    it('should exist', function () {
+'use strict';
+
+const defineAutoTests = () => {
+  describe('WiFiManager (window.wifiManager)', () => {
+    it('should exist', () => {
       expect(window.wifiManager).toBeDefined();
     });
-    it('should contain a connect function', function () {
+    it('should contain a connect function', () => {
       expect(window.wifiManager.connect).toBeDefined();
       expect(typeof window.wifiManager.connect === 'function').toBe(true);
     });
-    it('should contain a disconnect function', function () {
+    it('should contain a disconnect function', () => {
       expect(window.wifiManager.disconnect).toBeDefined();
       expect(typeof window.wifiManager.disconnect === 'function').toBe(true);
     });
   });
 
-  describe('connect method', function () {
-    it('should throw with no arguments', function () {
-      expect(function () {
+  describe('connect method', () => {
+    it('should throw with no arguments', () => {
+      expect(() => {
         window.wifiManager.connect();
       }).toThrow();
     });
-    it('should throw if 1st argument is not string', function () {
-      expect(function () {
-        window.wifiManager.connect(0, 'TARGET_PASSPHRASE', function () {}, function () {});
+    it('should throw if 1st argument is not string', () => {
+      expect(() => {
+        window.wifiManager.connect(0, 'TARGET_PASSPHRASE', () => {}, () => {});
       }).toThrow();
     });
-    it('should throw if 2nd argument is not string', function () {
-      expect(function () {
-        window.wifiManager.connect('TARGET_SSID', 1, function () {}, function () {});
+    it('should throw if 2nd argument is not string', () => {
+      expect(() => {
+        window.wifiManager.connect('TARGET_SSID', 1, () => {}, () => {});
       }).toThrow();
     });
-    it('should throw if success callback is not function', function () {
-      expect(function () {
-        window.wifiManager.connect('TARGET_SSID', 'TARGET_PASSPHRASE', 'foo', function () {});
+    it('should throw if success callback is not function', () => {
+      expect(() => {
+        window.wifiManager.connect('TARGET_SSID', 'TARGET_PASSPHRASE', 'foo', () => {});
       }).toThrow();
     });
-    it('should throw if failure callback is not function', function () {
-      expect(function () {
-        window.wifiManager.connect('TARGET_SSID', 'TARGET_PASSPHRASE', function () {}, 'bar');
+    it('should throw if failure callback is not function', () => {
+      expect(() => {
+        window.wifiManager.connect('TARGET_SSID', 'TARGET_PASSPHRASE', () => {}, 'bar');
       }).toThrow();
     });
   });
 
-  describe('disconnect method', function () {
-    it('should throw with no arguments', function () {
-      expect(function () {
+  describe('disconnect method', () => {
+    it('should throw with no arguments', () => {
+      expect(() => {
         window.wifiManager.disconnect();
       }).toThrow();
     });
-    it('should throw if 1st argument is not string', function () {
-      expect(function () {
-        window.wifiManager.disconnect(undefined, function () {}, function () {});
+    it('should throw if 1st argument is not string', () => {
+      expect(() => {
+        window.wifiManager.disconnect(undefined, () => {}, () => {});
       }).toThrow();
     });
-    it('should throw if success callback is not function', function () {
-      expect(function () {
-        window.wifiManager.disconnect('TARGET_SSID', 'foo', function () {});
+    it('should throw if success callback is not function', () => {
+      expect(() => {
+        window.wifiManager.disconnect('TARGET_SSID', 'foo', () => {});
       }).toThrow();
     });
-    it('should throw if failure callback is not function', function () {
-      expect(function () {
-        window.wifiManager.disconnect('TARGET_SSID', function () {}, 'bar');
+    it('should throw if failure callback is not function', () => {
+      expect(() => {
+        window.wifiManager.disconnect('TARGET_SSID', () => {}, 'bar');
       }).toThrow();
     });
   });
 };
+
+exports.defineAutoTests = defineAutoTests;
