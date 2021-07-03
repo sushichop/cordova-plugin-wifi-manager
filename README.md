@@ -3,8 +3,6 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sushichop/cordova-plugin-wifi-manager/blob/main/LICENSE)
 [![npm version](https://img.shields.io/npm/v/cordova-plugin-wifi-manager.svg?colorB=blue)](https://www.npmjs.com/package/cordova-plugin-wifi-manager)
 ![GitHub Actions](https://github.com/sushichop/cordova-plugin-wifi-manager/workflows/ci/badge.svg)
-[![CircleCI](https://img.shields.io/circleci/project/github/sushichop/cordova-plugin-wifi-manager/main.svg?label=circleci)](https://circleci.com/gh/sushichop/cordova-plugin-wifi-manager)
-[![Travis](https://img.shields.io/travis/sushichop/cordova-plugin-wifi-manager/main.svg?label=travis)](https://travis-ci.org/sushichop/cordova-plugin-wifi-manager)
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg)](https://github.com/Flet/semistandard)
 
 Wi-Fi Manager Plugin for Apache Cordova
@@ -37,13 +35,14 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady () {
   window.wifiManager.connect(
-    'TARGET_SSID',
-    'TARGET_PASSPHRASE',
-    function (ssid, passphrase) {
-      console.log('Successful. ssid: ' + ssid + ', passphrase: ' + passphrase);
+    'SAMPLE_SSID',
+    'SAMPLE_PASSPHRASE',
+    function () {
+      console.log('connect method was successfully called.');
     },
-    function (code, message) {
-      console.log('Failed. code: ' + code + ', message: ' + message);
+    function (result) {
+      console.log('disconnect method failed to be called. ' +
+        'code: ' + result.code + ', message: ' + result.message);
     }
   );
 }
@@ -54,14 +53,15 @@ function onDeviceReady () {
 ```javascript
 document.addEventListener('deviceready', onDeviceReady, false);
 
-function onDeviceReady () {  
+function onDeviceReady () {
   window.wifiManager.disconnect(
-    'TARGET_SSID',
-    function (ssid) {
-      console.log('Successful. ssid: ' + ssid);
+    'SAMPLE_SSID',
+    function () {
+      console.log('disconnect method was successfully called.');
     },
-    function (code, message) {
-      console.log('Failed. code: ' + code + ', message: ' + message);
+    function (result) {
+      console.log('disconnect method failed to be called. ' +
+        'code: ' + result.code + ', message: ' + result.message);
     }
   );
 }

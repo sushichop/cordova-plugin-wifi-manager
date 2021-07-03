@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Wi-Fi Manager Plugin for Apache Cordova",
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "types": "./types/index.d.ts",
   "cordova": {
@@ -25,22 +25,21 @@
     "wifi"
   ],
   "scripts": {
-    "lint": "eslint --ext js ./",
-    "lint:fix": "eslint --ext js ./ --quiet --fix",
+    "lint": "eslint --ext .js ./",
+    "lint:fix": "eslint --ext .js --fix ./",
     "test:android": "cordova-paramedic --cleanUpAfterRun --verbose --platform android --plugin .",
     "test:ios": "cordova-paramedic --cleanUpAfterRun --verbose --platform ios --plugin ."
   },
   "author": "Koichi Yokota",
   "license": "MIT",
   "devDependencies": {
-    "danger": "^10.5.0",
-    "eslint": "^7.12.0",
+    "danger": "^10.6.6",
+    "eslint": "^7.30.0",
     "eslint-cli": "^1.1.1",
-    "eslint-config-semistandard": "^15.0.1",
-    "eslint-config-standard": "^15.0.0",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-config-semistandard": "^16.0.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.2"
+    "eslint-plugin-promise": "^5.1.0"
   }
 }
