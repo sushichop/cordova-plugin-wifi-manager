@@ -100,6 +100,11 @@ public class WiFiManagerPlugin extends CordovaPlugin {
                 .setNetworkSpecifier(wifiNetworkSpecifierBuilder.build())
                 .build();
 
+        if (networkCallback != null) {
+            connectivityManager.unregisterNetworkCallback(networkCallback);
+            networkCallback = null;
+        }
+        
         networkCallback = new ConnectivityManager.NetworkCallback() {
             @Override
             public void onAvailable(Network network) {

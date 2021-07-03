@@ -2,6 +2,7 @@
 
 - Update `package.json` and plugin interfaces. [#24](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/24)
 - Does not add json object in success callback. [#25](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/25)
+- Unregister `networkCallback` before connecting if needed. [#26](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/26)
 
 ## [0.3.0](https://github.com/sushichop/cordova-plugin-wifi-manager/tree/0.3.0) (2020-10-25)
 
