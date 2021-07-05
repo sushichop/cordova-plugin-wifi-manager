@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-wifi-manager-tests" version="0.3.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="cordova-plugin-wifi-manager-tests" version="0.4.0">
     <name>WiFiManager Tests</name>
     <description>Wi-Fi Manager Plugin Tests</description>
     <license>MIT</license>
