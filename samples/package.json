@@ -1,0 +1,26 @@
+{
+  "name": "cordova-plugin-wifi-manager-app",
+  "version": "0.4.0",
+  "description": "Wi-Fi Manager Plugin App",
+  "cordova": {
+    "id": "cordova-plugin-wifi-manager-app",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-wifi-manager": {},
+      "cordova-plugin-inappbrowser": {}
+    }
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios",
+    "wifi"
+  ],
+  "author": "Koichi Yokota",
+  "license": "MIT"
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com https://httpbin.org; style-src 'self'; media-src *; img-src 'self' data: content:;">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <link rel="stylesheet" href="css/index.css">
+  <title>WiFiManager Plugin Sample Application</title>
+</head>
+<body>
+  <div class="app">
+    <h1>Sample App</h1>
+    <div class="button">
+      <input type="button" id="connect" value="connect">
+      <input type="button" id="disconnect" value="disconnect">
+      <input type="button" id="http-get" value="http-get">
+      <input type="button" id="browse" value="browse">
+    </div>
+    <div class="message">
+      <div id="deviceready">connecting to device...</div>
+      <div id="message">...</div>
+    </div>
+  </div>
+  <script src="cordova.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>
+
