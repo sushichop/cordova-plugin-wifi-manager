@@ -20,7 +20,7 @@ cordova plugin add cordova-plugin-wifi-manager
 
 __Notice__ 
 
-When you use this plugin for Android 10 (API level 29) or later, you can connect to the Internet using [cordova-plugin-inappbrowser](https://github.com/apache/cordova-plugin-inappbrowser). This seems to be due to the specification of new Android API, [WifiNetworkSpecifier](https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier).
+When you use this plugin for Android 10 (API level 29) or later, you can connect to the Internet only through your own (cordova) app. This is due to the specification of new Android API, [WifiNetworkSpecifier](https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier).
 
 If you want to purposely use the deprecated Android API, run the following.
 
@@ -34,40 +34,40 @@ cordova run android --device -- --gradleArg=-PcdvTargetSdkVersion=28
 #### Connect to Wi-Fi access point
 
 ```javascript
-document.addEventListener('deviceready', onDeviceReady, false);
-
-function onDeviceReady () {
+const onDeviceReady = () => {
   window.wifiManager.connect(
     'SAMPLE_SSID',
     'SAMPLE_PASSPHRASE',
-    function () {
+    () => {
       console.log('connect method was successfully called.');
     },
-    function (result) {
-      console.log('disconnect method failed to be called. ' +
-        'code: ' + result.code + ', message: ' + result.message);
+    (result) => {
+      console.log('connect method failed to be called.');
+      console.log(`code: ${result.code}, message: ${result.message}`);
     }
   );
-}
+};
+
+document.addEventListener('deviceready', onDeviceReady, false);
 ```
 
 #### Disconnect from Wi-Fi access point
 
 ```javascript
-document.addEventListener('deviceready', onDeviceReady, false);
-
-function onDeviceReady () {
+const onDeviceReady = () => {
   window.wifiManager.disconnect(
     'SAMPLE_SSID',
-    function () {
+    () => {
       console.log('disconnect method was successfully called.');
     },
-    function (result) {
-      console.log('disconnect method failed to be called. ' +
-        'code: ' + result.code + ', message: ' + result.message);
+    (result) => {
+      console.log('disconnect method failed to be called.');
+      consoe.log(`code: ${result.code}, message: ${result.message}`);
     }
   );
-}
+};
+
+document.addEventListener('deviceready', onDeviceReady, false);
 ```
 
 ## License

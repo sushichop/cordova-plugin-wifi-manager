@@ -1,5 +1,7 @@
 .npmignore
 .gitignore
-node_modules/
+node_modules/*
+samples/*
+tests/*
 .idea/
 .DS_Store

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-wifi-manager-tests",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Wi-Fi Manager Plugin Tests",
   "cordova": {
     "id": "cordova-plugin-wifi-manager-tests",

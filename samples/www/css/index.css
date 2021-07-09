@@ -1,0 +1,27 @@
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-user-select: none;
+}
+
+.app {
+  text-align:center;
+}
+
+h1 {
+  font-size:20px;
+}
+
+.button {
+  font-size:15px;
+  margin:18px 5px;
+}
+
+message {
+  text-align:left;
+  font-size:12px;
+}
