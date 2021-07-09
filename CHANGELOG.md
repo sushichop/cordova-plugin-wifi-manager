@@ -1,4 +1,4 @@
-## [x.y.z](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/x.y.z) (yyyy-mm-dd)
+## [0.4.1](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/0.4.1) (2021-07-09)
 
 - Add sample code. [#28](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/28)
 
