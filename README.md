@@ -20,8 +20,7 @@ cordova plugin add cordova-plugin-wifi-manager
 
 __Notice__ 
 
-When you use this plugin for Android 10 (API level 29) or later, you can connect to the Internet only through your 
-own (cordova) app. This is due to the specification of new Android API, [WifiNetworkSpecifier](https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier).
+When you use this plugin for Android 10 (API level 29) or later, you can connect to the Internet only through your own (cordova) app. This is due to the specification of new Android API, [WifiNetworkSpecifier](https://developer.android.com/reference/android/net/wifi/WifiNetworkSpecifier).
 
 If you want to purposely use the deprecated Android API, run the following.
 
