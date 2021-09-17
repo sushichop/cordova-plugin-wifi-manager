@@ -6,12 +6,12 @@ const connect = () => {
     'SAMPLE_SSID',
     'SAMPLE_PASSPHRASE',
     () => {
-      document.getElementById('message').innerText =
-        'connect method was successfully called.';
+      document.getElementById('message').innerText = 'connect method was successfully called.';
     },
     (result) => {
-      document.getElementById('message').innerText =
-        `connect method failed to be called. code: ${result.code}, message: ${result.message}`;
+      document.getElementById(
+        'message'
+      ).innerText = `connect method failed to be called. code: ${result.code}, message: ${result.message}`;
     }
   );
   console.log('--- connect END -----');
@@ -22,12 +22,12 @@ const disconnect = () => {
   window.wifiManager.disconnect(
     'SAMPLE_SSID',
     () => {
-      document.getElementById('message').innerText =
-        'disconnect method was successfully called.';
+      document.getElementById('message').innerText = 'disconnect method was successfully called.';
     },
     (result) => {
-      document.getElementById('message').innerText =
-        `disconnect method failed to be called. code: ${result.code}, message: ${result.message}`;
+      document.getElementById(
+        'message'
+      ).innerText = `disconnect method failed to be called. code: ${result.code}, message: ${result.message}`;
     }
   );
   console.log('--- disconnect END -----');
@@ -36,11 +36,11 @@ const disconnect = () => {
 const httpGet = () => {
   console.log('--- httpGet START ---');
   fetch('https://httpbin.org/get')
-    .then(response => response.text())
-    .then(text => {
+    .then((response) => response.text())
+    .then((text) => {
       document.getElementById('message').innerText = text;
     })
-    .catch(error => {
+    .catch((error) => {
       document.getElementById('message').innerText = error;
     });
   console.log('--- httpGet END -----');

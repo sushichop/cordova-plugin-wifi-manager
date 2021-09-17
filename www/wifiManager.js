@@ -11,7 +11,7 @@ const exec = require('cordova/exec');
  * @param onSuccess {Function} Callback invoked when the connect method was successfully called.
  * @param onFailure {Function} Callback invoked when the connect method failed to be called.
  */
-function connect (ssid, passphrase, onSuccess, onFailure) {
+function connect(ssid, passphrase, onSuccess, onFailure) {
   argscheck.checkArgs('ssFF', PLUGIN_NAME + '.connect', arguments);
   exec(onSuccess, onFailure, PLUGIN_NAME, 'connect', [ssid, passphrase]);
 }
@@ -22,12 +22,12 @@ function connect (ssid, passphrase, onSuccess, onFailure) {
  * @param onSuccess {Function} Callback invoked when the disconnect method was successfully called.
  * @param onFailure {Function} Callback invoked when the disconnect method failed to be called.
  */
-function disconnect (ssid, onSuccess, onFailure) {
+function disconnect(ssid, onSuccess, onFailure) {
   argscheck.checkArgs('sFF', PLUGIN_NAME + '.disconnect', arguments);
   exec(onSuccess, onFailure, PLUGIN_NAME, 'disconnect', [ssid]);
 }
 
 module.exports = {
   connect: connect,
-  disconnect: disconnect
+  disconnect: disconnect,
 };

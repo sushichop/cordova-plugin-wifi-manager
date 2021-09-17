@@ -3,10 +3,10 @@ name: Danger
 on:
   pull_request:
     branches:
-    - '**'
+      - '**'
   issue_comment:
     types:
-    - created
+      - created
 
 jobs:
   danger-for-internal:
@@ -16,17 +16,17 @@ jobs:
       && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-    - name: Clone the source for the event
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - name: Danger JS
-      run: npx danger ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Clone the source for the event
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Danger JS
+        run: npx danger ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   danger-for-external:
     name: Danger for external - node.js 14.x
@@ -36,20 +36,20 @@ jobs:
       && startsWith(github.event.comment.body, '/danger')
     runs-on: ubuntu-latest
     steps:
-    - name: Check repository permission for user
-      uses: sushichop/action-repository-permission@v1
-      with:
-        required-permission: write
-        reaction-permitted: rocket
-    - name: Clone the PR source
-      uses: actions/checkout@v2
-      with:
-        ref: refs/pull/${{ github.event.issue.number }}/head
-        fetch-depth: 0
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - name: Danger JS
-      run: npx danger ci
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check repository permission for user
+        uses: sushichop/action-repository-permission@v1
+        with:
+          required-permission: write
+          reaction-permitted: rocket
+      - name: Clone the PR source
+        uses: actions/checkout@v2
+        with:
+          ref: refs/pull/${{ github.event.issue.number }}/head
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+      - name: Danger JS
+        run: npx danger ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

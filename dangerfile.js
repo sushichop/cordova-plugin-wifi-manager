@@ -1,4 +1,4 @@
-import { warn, danger } from 'danger';
+const { message, warn, danger } = require('danger');
 
 const modifiedFiles = danger.git.modified_files;
 const createdFiles = danger.git.created_files;
@@ -46,3 +46,6 @@ if (packageChanged && !lockfileChanged) {
   Perhaps you need to run <i>npm install</i>?
   `);
 }
+
+// Display `danger` has been executed.
+message(`<i>danger</i> has been executed.`);

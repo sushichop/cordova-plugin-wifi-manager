@@ -14,12 +14,7 @@ declare namespace WifiManagerPlugin {
      * @param onSuccess Callback invoked when the connect method was successfully called.
      * @param onFailure Callback invoked when the disconnect method failed to be called.
      */
-    connect(
-      ssid: string,
-      passphrase: string,
-      onSuccess: SuccessCallback,
-      onFailure: FailureCallback,
-    ): void;
+    connect(ssid: string, passphrase: string, onSuccess: SuccessCallback, onFailure: FailureCallback): void;
 
     /**
      * Disconnects from Wi-Fi access point.
@@ -27,11 +22,7 @@ declare namespace WifiManagerPlugin {
      * @param onSuccess Callback invoked when the disconnect method was successfully called.
      * @param onFailure Callback invoked when the disconnect method failed to be called.
      */
-    disconnect(
-      ssid: string,
-      onSuccess: SuccessCallback,
-      onFailure: FailureCallback,
-    ): void;
+    disconnect(ssid: string, onSuccess: SuccessCallback, onFailure: FailureCallback): void;
   }
 
   /**

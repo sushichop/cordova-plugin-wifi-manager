@@ -23,12 +23,22 @@ const defineAutoTests = () => {
     });
     it('should throw if 1st argument is not string', () => {
       expect(() => {
-        window.wifiManager.connect(0, 'TARGET_PASSPHRASE', () => {}, () => {});
+        window.wifiManager.connect(
+          0,
+          'TARGET_PASSPHRASE',
+          () => {},
+          () => {}
+        );
       }).toThrow();
     });
     it('should throw if 2nd argument is not string', () => {
       expect(() => {
-        window.wifiManager.connect('TARGET_SSID', 1, () => {}, () => {});
+        window.wifiManager.connect(
+          'TARGET_SSID',
+          1,
+          () => {},
+          () => {}
+        );
       }).toThrow();
     });
     it('should throw if success callback is not function', () => {
@@ -51,7 +61,11 @@ const defineAutoTests = () => {
     });
     it('should throw if 1st argument is not string', () => {
       expect(() => {
-        window.wifiManager.disconnect(undefined, () => {}, () => {});
+        window.wifiManager.disconnect(
+          undefined,
+          () => {},
+          () => {}
+        );
       }).toThrow();
     });
     it('should throw if success callback is not function', () => {

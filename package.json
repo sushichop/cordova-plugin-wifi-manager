@@ -25,8 +25,12 @@
     "wifi"
   ],
   "scripts": {
-    "lint": "eslint --ext .js ./",
-    "lint:fix": "eslint --ext .js --fix ./",
+    "lint": "run-p -l -c --aggregate-output lint:*",
+    "lint:eslint": "eslint . --ext .js",
+    "lint:prettier": "prettier . --check",
+    "fix": "run-s fix:eslint fix:prettier",
+    "fix:eslint": "npm run lint:eslint -- --fix",
+    "fix:prettier": "npm run lint:prettier -- --write",
     "test:android": "cordova-paramedic --cleanUpAfterRun --verbose --platform android --plugin .",
     "test:ios": "cordova-paramedic --cleanUpAfterRun --verbose --platform ios --plugin ."
   },
@@ -34,12 +38,9 @@
   "license": "MIT",
   "devDependencies": {
     "danger": "^10.6.6",
-    "eslint": "^7.30.0",
-    "eslint-cli": "^1.1.1",
-    "eslint-config-semistandard": "^16.0.0",
-    "eslint-config-standard": "^16.0.3",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0"
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.4.1"
   }
 }
