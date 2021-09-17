@@ -3,12 +3,12 @@ name: CI
 on:
   push:
     branches:
-    - main
+      - main
     tags:
-    - '**'
+      - '**'
   pull_request:
     branches:
-    - '**'
+      - '**'
 
 jobs:
   lint:
@@ -18,13 +18,13 @@ jobs:
       matrix:
         node: [14.x]
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
-    - run: |
-        npm ci
-        npm run lint
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: |
+          npm ci
+          npm run lint
 
   ios-test:
     name: Cordova Paramedic Test - ${{ matrix.os }}, node.js ${{ matrix.node }}
@@ -34,10 +34,10 @@ jobs:
         node: [12.x, 14.x]
         os: [ios]
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
-    - run: |
-        ./scripts/setup-${{ matrix.os }}.sh
-        ./scripts/paramedic-${{ matrix.os }}.sh
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+      - run: |
+          ./scripts/setup-${{ matrix.os }}.sh
+          ./scripts/paramedic-${{ matrix.os }}.sh
