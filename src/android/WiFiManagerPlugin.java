@@ -200,6 +200,7 @@ public class WiFiManagerPlugin extends CordovaPlugin {
     @TargetApi(Build.VERSION_CODES.Q)
     private void disconnectAndroidQ(CallbackContext callbackContext) {
         if (networkCallback != null) {
+            connectivityManager.bindProcessToNetwork(null);
             connectivityManager.unregisterNetworkCallback(networkCallback);
             networkCallback = null;
         }
