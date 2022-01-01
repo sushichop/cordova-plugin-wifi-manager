@@ -1,6 +1,7 @@
-## [x.y.z](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/x.y.z) (yyyy-mm-dd)
+## [0.4.2](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/0.4.2) (2022-01-01)
 
 - Update ESLint and Prettier. [#29](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/29)
+- Unbind process from network on disconnect on Android Q. [#32](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/32)
 
 ## [0.4.1](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/0.4.1) (2021-07-09)
 
