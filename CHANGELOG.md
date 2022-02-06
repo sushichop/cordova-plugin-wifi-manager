@@ -1,4 +1,4 @@
-## [x.y.z](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/x.y.z) (yyyy-mm-dd)
+## [0.5.0](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/0.5.0) (2022-02-06)
 
 - Support open Wi-Fi network. [#33](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/33)
 
