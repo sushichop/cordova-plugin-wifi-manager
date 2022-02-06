@@ -1,3 +1,7 @@
+## [x.y.z](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/x.y.z) (yyyy-mm-dd)
+
+- Support open Wi-Fi network. [#33](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/33)
+
 ## [0.4.2](https://github.com/sushichop/cordova-plugin-wifi-manager/releases/tag/0.4.2) (2022-01-01)
 
 - Update ESLint and Prettier. [#29](https://github.com/sushichop/cordova-plugin-wifi-manager/pull/29)

@@ -10,7 +10,7 @@ on:
 
 jobs:
   danger-for-internal:
-    name: Danger for internal - node.js 14.x
+    name: Danger for internal
     if: |
       github.event_name == 'pull_request'
       && github.event.pull_request.head.repo.full_name == github.repository
@@ -22,18 +22,18 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Danger JS
         run: npx danger ci
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   danger-for-external:
-    name: Danger for external - node.js 14.x
+    name: Danger for external
     if: |
       github.event_name == 'issue_comment' && github.event.action == 'created'
       && github.event.issue.pull_request != null
-      && startsWith(github.event.comment.body, '/danger')
+      && startsWith(github.event.comment.body, '/check')
     runs-on: ubuntu-latest
     steps:
       - name: Check repository permission for user
@@ -48,7 +48,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
-          node-version: 14.x
+          node-version: 16.x
       - name: Danger JS
         run: npx danger ci
         env:
