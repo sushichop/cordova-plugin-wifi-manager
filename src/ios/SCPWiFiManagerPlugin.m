@@ -1,17 +1,20 @@
 #import "SCPWiFiManagerPlugin.h"
 #import <NetworkExtension/NetworkExtension.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
 
 static const NSInteger kErrorCodeOffset                 = 2000;
 
 typedef NS_ENUM(NSInteger, SCPWiFiManagerPluginErrorCode) {
     SCPWiFiManagerPluginErrorCodeTooShortPassphrase     =   1 + kErrorCodeOffset,
     SCPWiFiManagerPluginErrorCodeNotIOSDevice           = 100 + kErrorCodeOffset,
-    SCPWiFiManagerPluginErrorCodeNotSupportedIOSVersion = 101 + kErrorCodeOffset
+    SCPWiFiManagerPluginErrorCodeNotSupportedIOSVersion = 101 + kErrorCodeOffset,
+    SCPWiFiManagerPluginErrorCodeConnectFailed          = 102 + kErrorCodeOffset,
 };
 
 static NSString *const kErrorMessageTooShortPassphrase      = @"too short passphrase(must be at least 8 characters) for WPA/WPA2 Wi-Fi network.";
 static NSString *const kErrorMessageNotIOSDevice            = @"not iOS device.";
 static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iOS version.";
+static NSString *const kErrorMessageConnectFailed           = @"couldn't connect to network.";
 
 @interface SCPWiFiManagerPlugin ()
 
@@ -70,8 +73,16 @@ static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iO
             CDVPluginResult *result = [self p_createPluginErrorResultWithCode:error.code message:error.localizedDescription];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         } else {
-            CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            NSDictionary *r = [self fetchSSIDInfo];
+            NSString *ssid = [r objectForKey:(id)kCNNetworkInfoKeySSID]; //@"SSID"
+
+            if ([ssid isEqualToString:configuration.SSID]) {
+                CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            } else {
+                CDVPluginResult *result = [self p_createPluginErrorResultWithCode:SCPWiFiManagerPluginErrorCodeConnectFailed message:kErrorMessageConnectFailed];
+                [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            }
         }
     }];
 }
@@ -81,6 +92,19 @@ static NSString *const kErrorMessageNotSupportedIOSVersion  = @"not supported iO
     dict[@"code"] = @(code);
     dict[@"message"] = message;
     return [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsDictionary:dict];
+}
+
+- (id)fetchSSIDInfo {
+    // see http://stackoverflow.com/a/5198968/907720
+    NSArray *ifs = (__bridge_transfer NSArray *)CNCopySupportedInterfaces();
+    NSLog(@"Supported interfaces: %@", ifs);
+    NSDictionary *info;
+    for (NSString *ifnam in ifs) {
+        info = (__bridge_transfer NSDictionary *)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        NSLog(@"%@ => %@", ifnam, info);
+        if (info && [info count]) { break; }
+    }
+    return info;
 }
 
 @end
